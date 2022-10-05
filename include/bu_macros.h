@@ -75,11 +75,11 @@
 
 /* Validate a value at runtime. */
 /* EXITPOINT 14 on fail*/
-#ifndef BU_ASSERT(X)\
+#ifndef BU_ASSERT
 	#define BU_ASSERT(X)\
 		if( !(X) ){\
 			BU_ERR_FUNC("Assert at %s:%d failed!\n", __FILE__, __LINE__);\
-			BU_TERMINATE(14);
+			BU_TERMINATE(14);\
 		}
 #endif
 
