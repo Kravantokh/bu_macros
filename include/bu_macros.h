@@ -64,12 +64,22 @@
 
 #if BU_RUNTIME_CHECKS
 /* Null checking on pointer. If the given value is null show error and stop the program. If error messages are suppressed the program should still stop */
-/* EXITPOINT 13 */
+/* EXITPOINT 13 on fail. */
 #ifndef BU_NULLCHECK
 	#define BU_NULLCHECK(A)\
 		if( (A) == NULL){\
-			BU_ERR_FUNC("This should not be a null pointer at %s:%d ", __FILE__, __LINE__);\
+			BU_ERR_FUNC("This should not be a null pointer at %s:%d\n", __FILE__, __LINE__);\
 			BU_TERMINATE(13);\
+		}
+#endif
+
+/* Validate a value at runtime. */
+/* EXITPOINT 14 on fail*/
+#ifndef BU_ASSERT(X)\
+	#define BU_ASSERT(X)\
+		if( !(X) ){\
+			BU_ERR_FUNC("Assert at %s:%d failed!\n", __FILE__, __LINE__);\
+			BU_TERMINATE(14);
 		}
 #endif
 
